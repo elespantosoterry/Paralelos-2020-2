@@ -5,18 +5,15 @@ using namespace std;
 
 #define MAX 300
 
-void multiplicacionBloques( double** a, double** b, double** c)
-{   
-    int n = MAX;
-    int blockSize = 50;
+void multiplicacionClasica(double** m1, double** m2, double** res){
 
-    for (int bi = 0; bi < n; bi += blockSize)
-        for (int bj = 0; bj < n; bj += blockSize)
-            for (int bk = 0; bk < n; bk += blockSize)
-                for (int i = 0; i < blockSize; i++)
-                    for (int j = 0; j < blockSize; j++)
-                        for (int k = 0; k < blockSize; k++)
-                            c[bi + i][bj + j] += a[bi + i][bk + k] * b[bk + k][bj + j];
+    for (int i = 0; i < MAX; i++){
+        for (int j = 0; j < MAX; j++){
+            res[i][j] = 0;
+            for (int k = 0; k < MAX; k++)
+                res[i][j] += m1[i][k] * m2[k][j];
+        }
+    }
 }
 
 int main() {
@@ -52,7 +49,7 @@ int main() {
 
     t0 = clock();
 
-    multiplicacionBloques(A, B, res);
+    multiplicacionClasica(A, B, res);
 
     t1 = clock();
 
